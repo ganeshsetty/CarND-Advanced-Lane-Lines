@@ -56,3 +56,14 @@ I applied this distortion correction to the test image './camera_cal/calibration
 
 ![](./miscellaneous_images/undistorted_output.png)
 
+##Pipeline (single images)
+
+**1. Provide an example of a distortion-corrected image.**
+
+To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
+
+Load camera calibration matrix "mtx" and distortion coefficients "dist" from pickled file as it pre-calculated in camera calibration module.Then read image test1.jpg using matplotlib image read as "img".It is in RGB format.Check the resolution of image to be undistorted is same as resolution of images used for calibration of camera. Use cv2.undistort(img, mtx, dist, None, mtx). Undistorted image is returned and plot the same.
+
+![](./miscellaneous_images/undistorted_image.png)
+
+
