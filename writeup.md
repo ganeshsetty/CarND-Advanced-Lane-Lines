@@ -67,3 +67,4 @@ Load camera calibration matrix "mtx" and distortion coefficients "dist" from pic
 ![](./miscellaneous_images/undistorted_image.png)
 
 
+**2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image. Provide an example of a binary image result.**
