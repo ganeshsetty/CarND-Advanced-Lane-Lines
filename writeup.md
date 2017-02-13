@@ -30,7 +30,7 @@ The goals / steps of this project are the following:
 
 **1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image**
 
-The camera calibration and distortion correction code is contained in the undistort_camera.ipynb file.
+  The camera calibration and distortion correction code is contained in the **"undistort_camera.ipynb"** file.
 
 Pre-requisite to do camera calibration: It requires calibration images which are already provided as /camera_cal/calibration*.jpg. The images were taken by camera keeping chessboard on flat surface and take from different angle, distance etc., . 
 The computational code for camera calibration is divided as 2 steps.
