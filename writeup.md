@@ -106,10 +106,31 @@ ii) Lane-line pixel detection and curve polynomial fit icode is contained in cod
 
 ![](./miscellaneous_images/hist_plot.png)
 
-I am using a sliding window, placed around the line centers, to find and follow the lines up to the top of the frame.First found the peak of the left and right halves of the histogram.These will be the starting point for the left i.e., "leftx_base" and right i.e., "rightx_base" lines.Choosing sliding windows of count 9 and window height is 1/9 of height of image.Identified window boundaries in x and y (and right and left) and also identified the nonzero pixels in x and y within the window.Appended these indices to the lists i.e list containing left and right lane pixel indices.Extracted left and right line pixel positions (leftx,rightx,lefty,righty). Using np.polyfit() function, fit a second order polynomial to each line.The function returns the polynomial coefficient of quadratic equation defining left line and right line ( left_fit, right_fit). The **polynomial_fit()** returns the line pixel positions as well as polynomial coefficients of qudratic equation defining left and right lines. The output of polynomial fitting is displayed below
+I am using a sliding window, placed around the line centers, to find and follow the lines up to the top of the frame.First found the peak of the left and right halves of the histogram.These will be the starting point for the left i.e., "leftx_base" and right i.e., "rightx_base" lines.Choosing sliding windows of count 9 and window height is 1/9 of height of image.Identified window boundaries in x and y (and right and left) and also identified the nonzero pixels in x and y within the window.Appended these indices to the lists i.e list containing left and right lane pixel indices.Extracted left and right line pixel positions (leftx,rightx,lefty,righty). Using np.polyfit() function, fit a second order polynomial to each line.The function returns the polynomial coefficient of quadratic equation defining left line and right line ( left_fit, right_fit). The **polynomial_fit()** returns the line pixel positions as well as polynomial coefficients of quadratic equation defining left and right lines. The output of polynomial fitting is displayed below
 
 ![](./miscellaneous_images/polynomial_fit_image.png)
 
+***Skip the sliding windows step once known where the lines are***
+In the next frame of video  don't need to do a blind search again, but instead  can just search in a margin around the previous line position. This functionality is implemented as function skip_sliding_windows() which takes next video frame's binary warped image as input alongwith polynomial coefficients of lane lines detected using sliding windows technique.The function returns the polynomial coefficients of quadratic equation defining left and right lines( left_fit, right_fit) and also the left and right line pixel positions (leftx,rightx,lefty,righty).
 
+![](./miscellaneous_images/lane_fit_skipslidingwindow.png)
+
+**5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.**
+
+
+
+
+**6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.**
+
+The process_image() function is defined which takes the test image and draws lane area alongwith providing information on radius of curvature and vehicle position from lane center. This is main function implementing pipeline for lane detection using advanced computer vision techniques described above. To get smoother lane lines between frames , a low pass fiter is implemented, meaning add each weighted new detection to a weighted previous frame detection of the lines to avoid jitter.
+A test image ./test_images/test6.jpg is given as input to process_image().Output visual display
+of the lane boundaries, numerical estimation of lane curvature and vehicle position from lane center as displayed below
+
+![](./output_images/lane_test6.jpg)
+
+
+## Pipeline (video)
+
+**1. Provide a link to your final video output. Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).**
 
 
