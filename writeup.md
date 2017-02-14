@@ -135,6 +135,8 @@ of the lane boundaries, numerical estimation of lane curvature and vehicle posit
 
 **1. Provide a link to your final video output. Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).**
 
+The video link is https://youtu.be/UFK4IpD4BjE
+
 Discussion
 
 **1. Briefly discuss any problems / issues you faced in your implementation of this project. Where will your pipeline likely fail? What could you do to make it more robust?**
