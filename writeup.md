@@ -69,7 +69,7 @@ Load camera calibration matrix "mtx" and distortion coefficients "dist" from pic
 
 **2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image. Provide an example of a binary image result.**
 
-I have used combination of color and gradient thresholds.
+I have used combination of color and gradient thresholds.The code is contained in **"lane_lines_framewise_analysis.ipynb"**
 
 ***Color threshold:***The function color_threshold() in code cell:8 takes threshold range and image as inputs and provide binary image of S channel and R channel.Only S channel will be used for lane detection as R channel fails as it detects light gray part of the road also.The color thresholded image is displayed below:
 
@@ -81,4 +81,19 @@ These gradient thresholds are combined with color threshold and applied on image
 ![](./miscellaneous_images/color_grad_binary.png)
 
 The combined thresholded binary image (having gradient thesholded in x direction + in y direction + magnitude of gradient + direction of gradient) gives better result as seen above.The dirt of road has been filtered well compared with other combined binary image shown above. 
+
+**3 .Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.**
+
+The code is contained in code cell:11 of **"lane_lines_framewise_analysis.ipynb"** file.The function which does perspective transform is defined as perspective_transform() which internally calls openCV function cv2.getPerspectiveTransform(). The src and dst points are hardcoded and called once to get the tranformation matrix 'M' and inverse trasform matrix 'Minv'. The src points are selected from ./test_images/straight_lines.jpg"  and the polygon drawn on the image is shown below.The dst points are calculated so that the lane lines(left and right) for warped(birds-view) image obtained through perspective transform is parallel.
+
+      src = np.float32([[585,460],[695,460],[1127,720],[203,720]])  
+      dst = np.float32([[220,0],[985,0],[985,720],[220,720]])  
+
+The dst points particularly left bottom and right bottom are tuned such that the objects not between the lanes are avoided as much as possible as it was observed the side vehicles coming near the lane and boundary wall of the road introduce errors in lane detection 
+The warped image with lane lines parallel is verified by plotting the images before warping and after warping.The code is contained in code cell:12  of **"lane_lines_framewise_analysis.ipynb"** file
+
+![](./miscellaneous_images/warped_image.png)
+
+
+
 
