@@ -116,6 +116,7 @@ In the next frame of video  don't need to do a blind search again, but instead  
 ![](./miscellaneous_images/lane_fit_skipslidingwindow.png)
 
 **5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.**
+The function **measure_curve()** is defined to calculate the radius of curvature of lane lines closest to vehicle.It takes quadratic coefficients of left and right lane as input and returns the average of radii of left and right lane curvatures in real world space.
 
 
 
