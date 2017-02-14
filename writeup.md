@@ -98,9 +98,18 @@ The warped image with lane lines parallel is verified by plotting the images bef
 
 To identify the lane-line pixels, following the below steps:
 
-i)The undistorted image is combine thresholded with  gradient and color to get combined binary image.Then the combined binary image is warped. This functionality is obtained using a function defined as corners_unwarp() which takes undistorted image as input and return binary warped image. The corresponding code is contained in code cell:12 of **"lane_lines_framewise_analysis.ipynb"** file. The output of displayed below shows all images what an undistorted image undergo in this pipeline:
+i)The undistorted image is combine thresholded with  gradient and color to get combined binary image.Then the combined binary image is warped. This functionality is obtained using a function defined as **corners_unwarp()** which takes undistorted image as input and return binary warped image. The corresponding code is contained in code cell:12 of **"lane_lines_framewise_analysis.ipynb"** file. The output of displayed below shows all images what an undistorted image undergo in this pipeline:
 
 ![](./miscellaneous_images/binary_warped.png)
 
-ii) Lane-line pixel detction and curve polynomial fit icode is contained in code cell: of **"lane_lines_framewise_analysis.ipynb"** file. Now it is seen that binary warped image has lane lines displayed in easy form for detection.First the lane-line pixels are to be identified i.e to decide explicitly which pixels are part of the lines and which belong to the left line and which belong to the right line. The function polynomial_fit() defined takes binary warped image as input.In this function, first computing histogram of lower half of image(binary warped) as the peaks will be good indicators of x-position of lane lines starting point.
+ii) Lane-line pixel detection and curve polynomial fit icode is contained in code cell: of **"lane_lines_framewise_analysis.ipynb"** file. Now it is seen that binary warped image has lane lines displayed in easy form for detection.First the lane-line pixels are to be identified i.e to decide explicitly which pixels are part of the lines and which belong to the left line and which belong to the right line. The function **polynomial_fit()** defined takes binary warped image as input.In this function, first computing histogram of lower half of image(binary warped) as the peaks will be good indicators of x-position of lane lines starting point.For example test6.jpg image,displayed the binary warped image and its histogram plot
+
+![](./miscellaneous_images/hist_plot.png)
+
+I am using a sliding window, placed around the line centers, to find and follow the lines up to the top of the frame.First found the peak of the left and right halves of the histogram.These will be the starting point for the left i.e., "leftx_base" and right i.e., "rightx_base" lines.Choosing sliding windows of count 9 and window height is 1/9 of height of image.Identified window boundaries in x and y (and right and left) and also identified the nonzero pixels in x and y within the window.Appended these indices to the lists i.e list containing left and right lane pixel indices.Extracted left and right line pixel positions (leftx,rightx,lefty,righty). Using np.polyfit() function, fit a second order polynomial to each line.The function returns the polynomial coefficient of quadratic equation defining left line and right line ( left_fit, right_fit). The **polynomial_fit()** returns the line pixel positions as well as polynomial coefficients of qudratic equation defining left and right lines. The output of polynomial fitting is displayed below
+
+![](./miscellaneous_images/polynomial_fit_image.png)
+
+
+
 
