@@ -121,8 +121,9 @@ In the next frame of video  don't need to do a blind search again, but instead  
 
 
 **6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.**
+First a function **draw_lanearea()** is defined to draw the lines back down onto the road.This function takes a warped binary image called binary_warped,undistorted image and quadratic coefficients "left_fit and right_fit" as inputs.This function implements fitting the lines with a polynomial using ploty (the y values) and generates  x position of left and right lane lines called "left_fitx and right_fitx" respectively.Then it creates an warped blank image to draw the lines on.Then draws the lane onto the warped blank image using openCV function cv2.fillPoly() provided with recasted x and y points. Then warps the blank back to original image space using inverse perspective matrix "Minv" and combines the result with the original image.
 
-The process_image() function is defined which takes the test image and draws lane area alongwith providing information on radius of curvature and vehicle position from lane center. This is main function implementing pipeline for lane detection using advanced computer vision techniques described above. To get smoother lane lines between frames , a low pass fiter is implemented, meaning add each weighted new detection to a weighted previous frame detection of the lines to avoid jitter.
+The **process_image()** function is defined which takes the test image and draws lane area alongwith providing information on radius of curvature and vehicle position from lane center. This is main function implementing pipeline for lane detection using advanced computer vision techniques described above. To get smoother lane lines between frames , a low pass fiter is implemented, meaning add each weighted new detection to a weighted previous frame detection of the lines to avoid jitter.
 A test image ./test_images/test6.jpg is given as input to process_image().Output visual display
 of the lane boundaries, numerical estimation of lane curvature and vehicle position from lane center as displayed below
 
