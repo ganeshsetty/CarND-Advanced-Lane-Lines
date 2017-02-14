@@ -96,5 +96,11 @@ The warped image with lane lines parallel is verified by plotting the images bef
 
 **4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?**
 
+To identify the lane-line pixels, following the below steps:
 
+i)The undistorted image is combine thresholded with  gradient and color to get combined binary image.Then the combined binary image is warped. This functionality is obtained using a function defined as corners_unwarp() which takes undistorted image as input and return binary warped image. The corresponding code is contained in code cell:12 of **"lane_lines_framewise_analysis.ipynb"** file. The output of displayed below shows all images what an undistorted image undergo in this pipeline:
+
+![](./miscellaneous_images/binary_warped.png)
+
+ii) Lane-line pixel detction and curve polynomial fit icode is contained in code cell: of **"lane_lines_framewise_analysis.ipynb"** file. Now it is seen that binary warped image has lane lines displayed in easy form for detection.First the lane-line pixels are to be identified i.e to decide explicitly which pixels are part of the lines and which belong to the left line and which belong to the right line. The function polynomial_fit() defined takes binary warped image as input.In this function, first computing histogram of lower half of image(binary warped) as the peaks will be good indicators of x-position of lane lines starting point.
 
