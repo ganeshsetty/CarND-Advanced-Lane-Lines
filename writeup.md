@@ -117,9 +117,9 @@ In the next frame of video  don't need to do a blind search again, but instead  
 
 **5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.**
 The function **measure_curve()** is defined to calculate the radius of curvature of lane lines closest to vehicle.It takes quadratic coefficients of left and right lane as input and returns the average of radii of left and right lane curvatures in real world space.
+While measuring radii of curvature in real world space, assumption is the lane is about 30 meters long and 3.7 meters wide in real space  corresponding to 720 pixels and 700 pixels in pixel space respectively. The function implements  computation of x positions for left and right lane lines in pixel space, then  fit new polynomials to x,y in world space.Calculate the new radii of curvature in real world space using calculations defined in measure_curve() function.
 
-
-
+The function **vehicle_offset()** is defined to estimate the vehicle position from lane center. The x position of left and right lane intercepts at bottom of image is determined and averaged to find lane center.The difference between image center(camera position mounted in vehicle) and lane center gives the vehicle offset from lane center.
 
 **6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.**
 First a function **draw_lanearea()** is defined to draw the lines back down onto the road.This function takes a warped binary image called binary_warped,undistorted image and quadratic coefficients "left_fit and right_fit" as inputs.This function implements fitting the lines with a polynomial using ploty (the y values) and generates  x position of left and right lane lines called "left_fitx and right_fitx" respectively.Then it creates an warped blank image to draw the lines on.Then draws the lane onto the warped blank image using openCV function cv2.fillPoly() provided with recasted x and y points. Then warps the blank back to original image space using inverse perspective matrix "Minv" and combines the result with the original image.
