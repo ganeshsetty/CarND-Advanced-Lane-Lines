@@ -62,9 +62,23 @@ I applied this distortion correction to the test image './camera_cal/calibration
 
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
 
-Load camera calibration matrix "mtx" and distortion coefficients "dist" from pickled file as it pre-calculated in camera calibration module.Then read image test1.jpg using matplotlib image read as "img".It is in RGB format.Check the resolution of image to be undistorted is same as resolution of images used for calibration of camera. Use cv2.undistort(img, mtx, dist, None, mtx). Undistorted image is returned and plot the same.
+Load camera calibration matrix "mtx" and distortion coefficients "dist" from pickled file as it pre-calculated in camera calibration module.Then read image test1.jpg using matplotlib image read as "img".It is in RGB format.Check the resolution of image to be undistorted is same as resolution of images used for calibration of camera. Used openCV API cv2.undistort(img, mtx, dist, None, mtx). Undistorted image is returned and plot the same. The corresponding code is contained in "undistort_camera.ipynb" file as last code cell.
 
 ![](./miscellaneous_images/undistorted_image.png)
 
 
 **2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image. Provide an example of a binary image result.**
+
+I have used combination of color and gradient thresholds.
+
+***Color threshold:***The function color_threshold() in code cell:8 takes threshold range and image as inputs and provide binary image of S channel and R channel.Only S channel will be used for lane detection as R channel fails as it detects light gray part of the road also.The color thresholded image is displayed below:
+
+![](./miscellaneous_images/color_threshold_binary.png)
+
+***Gradient threshold:*** Three functions abs_sobel_thresh(),mag_thresh(),dir_threshold() are defined in code cells:5,6,7 respectively.
+These gradient thresholds are combined with color threshold and applied on image.The result is displayed below:
+
+![](./miscellaneous_images/color_grad_binary.png)
+
+The combined thresholded binary image (having gradient thesholded in x direction + in y direction + magnitude of gradient + direction of gradient) gives better result as seen above.The dirt of road has been filtered well compared with other combined binary image shown above. 
+
