@@ -94,6 +94,7 @@ The warped image with lane lines parallel is verified by plotting the images bef
 
 ![](./miscellaneous_images/warped_image.png)
 
+**4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?**
 
 
 
