@@ -106,11 +106,11 @@ The warped image with lane lines parallel is verified by plotting the images bef
 
 To identify the lane-line pixels, following the below steps:
 
-i)The undistorted image is combine thresholded with  gradient and color to get combined binary image.Then the combined binary image is warped. This functionality is obtained using a function defined as **corners_unwarp()** which takes undistorted image as input and return binary warped image. The corresponding code is contained in code cell:12 of **"lane_lines_framewise_analysis.ipynb"** file. The output of displayed below shows all images what an undistorted image undergo in this pipeline:
+i)The undistorted image is combine thresholded with  gradient and color to get combined binary image.Then the combined binary image is warped. This functionality is obtained using a function defined as **corners_unwarp()** which takes undistorted image as input and return binary warped image. The corresponding code is contained in code cell:13 of **"lane_lines_framewise_analysis.ipynb"** file. The output of displayed below shows all images what an undistorted image undergo in this pipeline:
 
 ![](./miscellaneous_images/binary_warped.png)
 
-ii) Lane-line pixel detection and curve polynomial fit icode is contained in code cell: of **"lane_lines_framewise_analysis.ipynb"** file. Now it is seen that binary warped image has lane lines displayed in easy form for detection.First the lane-line pixels are to be identified i.e to decide explicitly which pixels are part of the lines and which belong to the left line and which belong to the right line. The function **polynomial_fit()** defined takes binary warped image as input.In this function, first computing histogram of lower half of image(binary warped) as the peaks will be good indicators of x-position of lane lines starting point.For example test6.jpg image,displayed the binary warped image and its histogram plot
+ii) Lane-line pixel detection and curve polynomial fit icode is contained in code cell:16 of **"lane_lines_framewise_analysis.ipynb"** file. Now it is seen that binary warped image has lane lines displayed in easy form for detection.First the lane-line pixels are to be identified i.e to decide explicitly which pixels are part of the lines and which belong to the left line and which belong to the right line. The function **polynomial_fit()** defined takes binary warped image as input.In this function, first computing histogram of lower half of image(binary warped) as the peaks will be good indicators of x-position of lane lines starting point.For example test6.jpg image,displayed the binary warped image and its histogram plot
 
 ![](./miscellaneous_images/hist_plot.png)
 
@@ -119,7 +119,7 @@ I am using a sliding window, placed around the line centers, to find and follow 
 ![](./miscellaneous_images/polynomial_fit_image.png)
 
 ***Skip the sliding windows step once known where the lines are***
-In the next frame of video  don't need to do a blind search again, but instead  can just search in a margin around the previous line position. This functionality is implemented as function skip_sliding_windows() which takes next video frame's binary warped image as input alongwith polynomial coefficients of lane lines detected using sliding windows technique.The function returns the polynomial coefficients of quadratic equation defining left and right lines( left_fit, right_fit) and also the left and right line pixel positions (leftx,rightx,lefty,righty).
+In the next frame of video  don't need to do a blind search again, but instead  can just search in a margin around the previous line position. This functionality contained in code cell:17 is implemented as function **skip_sliding_windows()** which takes next video frame's binary warped image as input alongwith polynomial coefficients of lane lines detected using sliding windows technique.The function returns the polynomial coefficients of quadratic equation defining left and right lines( left_fit, right_fit) and also the left and right line pixel positions (leftx,rightx,lefty,righty).To visualize lane line plot using search near the proximity of lane lines detected in previuous frame an example code is implemented available in code cell:18
 
 ![](./miscellaneous_images/lane_fit_skipslidingwindow.png)
 
