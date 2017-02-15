@@ -26,6 +26,17 @@ The goals / steps of this project are the following:
 * Warp the detected lane boundaries back onto the original image.
 * Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 
+##Repository structure
+***undistort_camera.ipynb:***  This file implements the calibration of camera and undistortion of a test image
+
+***lane_lines_framewise_analysis:*** This file implements the advanced computer vision algorithms and pipeline to process the image for lane area mapping and numerical estimation of radius of curvature and vehicle position.
+
+***writeup.md:*** This the file where we are now.
+
+***output_images:*** The lane detected output of test images
+
+***miscellaneous_images:*** This has images obtained at each stage of pipelines which are embedded in this writeup.
+
 ##Camera Calibration
 
 **1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image**
