@@ -71,16 +71,24 @@ Load camera calibration matrix "mtx" and distortion coefficients "dist" from pic
 
 I have used combination of color and gradient thresholds.The code is contained in **"lane_lines_framewise_analysis.ipynb"**
 
-***Color threshold:***The function color_threshold() in code cell:8 takes threshold range and image as inputs and provide binary image of S channel and R channel.Only S channel will be used for lane detection as R channel fails as it detects light gray part of the road also.The color thresholded image is displayed below:
+***Color threshold:***The function color_threshold() in code cell:8 takes threshold range and image as inputs and provide binary image of S channel and R channel.Only S channel will be used for lane detection as R channel fails as it detects light gray part of the road also.The example code to display color thresholded image is contained in code cell:9.   The color thresholded image is displayed below:
 
 ![](./miscellaneous_images/color_threshold_binary.png)
 
-***Gradient threshold:*** Three functions abs_sobel_thresh(),mag_thresh(),dir_threshold() are defined in code cells:5,6,7 respectively.
-These gradient thresholds are combined with color threshold and applied on image.The result is displayed below:
+***Gradient threshold:*** Three functions abs_sobel_thresh(),mag_thresh(),dir_threshold() are defined in code cells:5,6,7 respectively.The functionalities provided are given below.These function uses Sobel filters to detect edges.
+
+The abs_soble_thresh() function internally uses openCV cv2.Sobel() function to calculate the gradient in 'x' direction and 'y' direction which is configurable. Then creates a mask of '1's where the scaled gradient lie within a threshold range( tuned to get clear lane markings) . The function returns binary output of gradient thresholded image.
+
+The mag_thresh() function calculates the magnitude of gradient.Then creates a binary image of ones where threshold is met,zeros otherwise.This function is heart of canny edge detection.
+
+As only interested in lane lines that are lying in certain orientations, the dir_thresh() function returns a binary output image which lies between direction threshold represented in radians[0.7,1.3]. Here '0' represents horizontal and pi/2 means vertical lines
+
+These gradient thresholds are combined with color threshold and applied on image.The example code is contained in code cell:10 The result is displayed below:
 
 ![](./miscellaneous_images/color_grad_binary.png)
 
 The combined thresholded binary image (having gradient thesholded in x direction + in y direction + magnitude of gradient + direction of gradient) gives better result as seen above.The dirt of road has been filtered well compared with other combined binary image shown above. 
+ 
 
 **3 .Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.**
 
